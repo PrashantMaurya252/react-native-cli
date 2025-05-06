@@ -5,9 +5,11 @@
  * @format
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Button,
+  Image,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -23,6 +25,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Basic from './src/components/Basic';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -55,6 +58,8 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+
+  
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -74,11 +79,7 @@ function App(): React.JSX.Element {
 
   return (
     <View style={styles.container}>
-      <View style={styles.boxContainer}>
-        <View style={styles.redBox}/>
-        <View style={styles.blueBox}/>
-        <View style={styles.greenBox}/>
-      </View>
+      <Basic/>
     </View>
   );
 }
@@ -102,29 +103,6 @@ const styles = StyleSheet.create({
   },
   container:{
     marginBottom:20
-  },
-  boxContainer:{
-    flexDirection:'row',
-    justifyContent:'space-around'
-  },
-  text:{
-    color:'white',
-    fontWeight:'900'
-  },
-  redBox:{
-    width:50,
-    height:50,
-    backgroundColor:'red'
-  },
-  blueBox:{
-    width:50,
-    height:50,
-    backgroundColor:'blue'
-  },
-  greenBox:{
-    width:50,
-    height:50,
-    backgroundColor:'green'
   },
 });
 
