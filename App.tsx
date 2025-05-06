@@ -26,6 +26,7 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Basic from './src/components/Basic';
+import TextInputComponent from './src/components/TextInput';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -80,6 +81,7 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <Basic/>
+      <TextInputComponent/>
     </View>
   );
 }
