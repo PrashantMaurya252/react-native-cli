@@ -27,6 +27,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import Basic from './src/components/Basic';
 import TextInputComponent from './src/components/TextInput';
+import ScrollViewComponent from './src/components/ScrollView';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -80,8 +81,11 @@ function App(): React.JSX.Element {
 
   return (
     <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent} nestedScrollEnabled={true}>
       <Basic/>
       <TextInputComponent/>
+      <ScrollViewComponent/>
+      </ScrollView>
     </View>
   );
 }
@@ -106,6 +110,9 @@ const styles = StyleSheet.create({
   container:{
     marginBottom:20
   },
+  scrollViewContent:{
+    padding:20,
+  }
 });
 
 export default App;
