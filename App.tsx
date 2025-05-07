@@ -28,6 +28,7 @@ import {
 import Basic from './src/components/Basic';
 import TextInputComponent from './src/components/TextInput';
 import ScrollViewComponent from './src/components/ScrollView';
+import StylingDemo from './src/components/Styling';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -85,7 +86,9 @@ function App(): React.JSX.Element {
       <Basic/>
       <TextInputComponent/>
       <ScrollViewComponent/>
+      <StylingDemo/>
       </ScrollView>
+      
     </View>
   );
 }
@@ -108,7 +111,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   container:{
-    marginBottom:20
+    marginBottom:20,
+    
   },
   scrollViewContent:{
     padding:20,
