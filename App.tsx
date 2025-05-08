@@ -30,6 +30,7 @@ import TextInputComponent from './src/components/TextInput';
 import ScrollViewComponent from './src/components/ScrollView';
 import StylingDemo from './src/components/Styling';
 import FlexLayout from './src/components/FlexLayout';
+import Touchable from './src/components/Touchable';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -89,6 +90,7 @@ function App(): React.JSX.Element {
       <ScrollViewComponent/>
       <StylingDemo/>
       <FlexLayout/>
+      <Touchable/>
       </ScrollView>
       
     </View>
