@@ -7,8 +7,18 @@ import {
   View,
 } from 'react-native';
 
-const TodoInput: React.FC = () => {
+interface TodoInputProps {
+  onAddTodo: (text: string) => void;
+}
+
+const TodoInput: React.FC<TodoInputProps> = ({onAddTodo}) => {
   const [text, setText] = useState('');
+  const handleAddTodo = () => {
+    if (text.trim()) {
+      onAddTodo(text.trim());
+      setText('');
+    }
+  };
   return (
     <View style={styles.container}>
       <TextInput
@@ -17,7 +27,7 @@ const TodoInput: React.FC = () => {
         style={styles.input}
         placeholder="Add a new Todo"
       />
-      <TouchableOpacity style={styles.addTodoBtn}>
+      <TouchableOpacity style={styles.addTodoBtn} onPress={handleAddTodo}>
         <Text style={styles.addTodoBtnText}>Add</Text>
       </TouchableOpacity>
     </View>
