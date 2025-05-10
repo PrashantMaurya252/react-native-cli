@@ -1,20 +1,27 @@
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Todo } from "../types"
+import { useState } from "react"
+import TodoEdit from "./TodoEdit"
 
 
 interface TodoItemProps{
     todo:Todo,
     onDelete:()=>void,
-    onToggle:()=>void
+    onToggle:()=>void,
+    onEdit:(newText:string)=>void
 }
-const TodoItem:React.FC<TodoItemProps> = ({todo,onDelete,onToggle})=>{
+const TodoItem:React.FC<TodoItemProps> = ({todo,onDelete,onToggle,onEdit})=>{
+    const [isEditing,setIsEditing] = useState(false)
+    if(isEditing){
+        return <TodoEdit/>
+    }
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.todoText} >
+            <TouchableOpacity style={styles.todoText} onPress={onToggle}>
                 <Text style={[styles.text,todo?.completed && styles.completedText]}>{todo.text}</Text>
             </TouchableOpacity>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.editBtn} onPress={onToggle}>
+                <TouchableOpacity style={styles.editBtn} onPress={()=>setIsEditing(true)}>
                     <Text style={styles.btnText}>Edit</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.deleteBtn} onPress={onDelete}>

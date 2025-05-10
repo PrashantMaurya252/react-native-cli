@@ -7,9 +7,9 @@
 
 import {StyleSheet, Text, View} from 'react-native';
 import TodoInput from './src/components/TodoInput';
-import { useState } from 'react';
+import {useState} from 'react';
 import TodoList from './src/components/TodoList';
-import { Todo } from './src/types';
+import {Todo} from './src/types';
 
 // import React, {useState} from 'react';
 // import type {PropsWithChildren} from 'react';
@@ -127,37 +127,52 @@ import { Todo } from './src/types';
 
 // export default App;
 
-
-
 function App(): React.JSX.Element {
-  const [todoList,setTodoList] = useState<Todo[]>([])
+  const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  const deleteTodo=(id:string)=>{
-     console.log(id)
-     setTodoList(todoList.filter(item=>item.id !== id))
-  }
+  const deleteTodo = (id: string) => {
+    console.log(id);
+    setTodoList(todoList.filter(item => item.id !== id));
+  };
 
-  const toggleTodo=(id:string)=>{
-     console.log(id)
-     setTodoList(todoList?.map(item=>item.id === id ? {
-      ...item,
-      completed:!item.completed
-     }:item))
-  }
+  const toggleTodo = (id: string) => {
+    console.log(id);
+    setTodoList(
+      todoList?.map(item =>
+        item.id === id
+          ? {
+              ...item,
+              completed: !item.completed,
+            }
+          : item,
+      ),
+    );
+  };
 
-  const addTodo = (text:string)=>{
-   setTodoList([...todoList,{
-    id:Date.now().toString(),
-    text,completed:false
-   }])
-  }
+  const editTodo = (id: string, newText: string) => {};
+
+  const addTodo = (text: string) => {
+    setTodoList([
+      ...todoList,
+      {
+        id: Date.now().toString(),
+        text,
+        completed: false,
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Todo App</Text>
-      <TodoInput onAddTodo={addTodo}/>
+      <TodoInput onAddTodo={addTodo} />
 
-      <TodoList onDeleteTodo={deleteTodo} onToggleTodo={toggleTodo} todoList={todoList}/>
+      <TodoList
+        onDeleteTodo={deleteTodo}
+        onToggleTodo={toggleTodo}
+        onEditTodo={editTodo}
+        todoList={todoList}
+      />
     </View>
   );
 }
