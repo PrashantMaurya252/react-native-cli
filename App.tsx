@@ -149,7 +149,15 @@ function App(): React.JSX.Element {
     );
   };
 
-  const editTodo = (id: string, newText: string) => {};
+  const editTodo = (id: string, newText: string) => {
+    console.log(id,newText,'from app.tsx');
+    setTodoList(
+      todoList?.map(item=>item.id === id ? {
+        ...item,
+        text:newText,
+      }:item)
+    )
+  };
 
   const addTodo = (text: string) => {
     setTodoList([

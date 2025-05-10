@@ -12,8 +12,18 @@ interface TodoItemProps{
 }
 const TodoItem:React.FC<TodoItemProps> = ({todo,onDelete,onToggle,onEdit})=>{
     const [isEditing,setIsEditing] = useState(false)
+
+    const handleEdit=(newText:string)=>{
+        console.log(newText,"newText")
+        onEdit(newText)
+        setIsEditing(false)
+    }
+
+    const handleCancel =()=>{
+       setIsEditing(false)
+    }
     if(isEditing){
-        return <TodoEdit/>
+        return <TodoEdit todo={todo} onSave={handleEdit} onCancel={handleCancel}/>
     }
     return (
         <View style={styles.container}>
