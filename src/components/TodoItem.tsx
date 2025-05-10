@@ -3,20 +3,22 @@ import { Todo } from "../types"
 
 
 interface TodoItemProps{
-    todo:Todo
+    todo:Todo,
+    onDelete:()=>void,
+    onToggle:()=>void
 }
-const TodoItem:React.FC<TodoItemProps> = ({todo})=>{
+const TodoItem:React.FC<TodoItemProps> = ({todo,onDelete,onToggle})=>{
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.todoText}>
+            <TouchableOpacity style={styles.todoText} >
                 <Text style={[styles.text,todo?.completed && styles.completedText]}>{todo.text}</Text>
             </TouchableOpacity>
             <View style={styles.btnContainer}>
-                <TouchableOpacity style={styles.editBtn}>
+                <TouchableOpacity style={styles.editBtn} onPress={onToggle}>
                     <Text style={styles.btnText}>Edit</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.deleteBtn}>
-                    <Text>Delete</Text>
+                <TouchableOpacity style={styles.deleteBtn} onPress={onDelete}>
+                    <Text style={styles.btnText}>Delete</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -52,7 +54,16 @@ const styles = StyleSheet.create({
         borderRadius:5,
         marginRight:5
     },
-    deleteBtn:{}
+    deleteBtn:{
+        backgroundColor:'#ff3b30',
+        paddingHorizontal:10,
+        paddingVertical:5,
+        borderRadius:5,
+    },
+    btnText:{
+        color:'#fff',
+        fontSize:15
+    }
 })
 
 
