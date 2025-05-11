@@ -10,6 +10,8 @@ import TodoInput from './src/components/TodoInput';
 import {useState} from 'react';
 import TodoList from './src/components/TodoList';
 import {Todo} from './src/types';
+import { NavigationContainer } from '@react-navigation/native';
+import RootNavigator from './src/RootNavigator';
 
 // import React, {useState} from 'react';
 // import type {PropsWithChildren} from 'react';
@@ -127,63 +129,92 @@ import {Todo} from './src/types';
 
 // export default App;
 
-function App(): React.JSX.Element {
-  const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  const deleteTodo = (id: string) => {
-    console.log(id);
-    setTodoList(todoList.filter(item => item.id !== id));
-  };
+// Todo App -----------------------------------------------------------------------------
 
-  const toggleTodo = (id: string) => {
-    console.log(id);
-    setTodoList(
-      todoList?.map(item =>
-        item.id === id
-          ? {
-              ...item,
-              completed: !item.completed,
-            }
-          : item,
-      ),
-    );
-  };
 
-  const editTodo = (id: string, newText: string) => {
-    console.log(id,newText,'from app.tsx');
-    setTodoList(
-      todoList?.map(item=>item.id === id ? {
-        ...item,
-        text:newText,
-      }:item)
-    )
-  };
+// function App(): React.JSX.Element {
+//   const [todoList, setTodoList] = useState<Todo[]>([]);
 
-  const addTodo = (text: string) => {
-    setTodoList([
-      ...todoList,
-      {
-        id: Date.now().toString(),
-        text,
-        completed: false,
-      },
-    ]);
-  };
+//   const deleteTodo = (id: string) => {
+//     console.log(id);
+//     setTodoList(todoList.filter(item => item.id !== id));
+//   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.headerText}>Todo App</Text>
-      <TodoInput onAddTodo={addTodo} />
+//   const toggleTodo = (id: string) => {
+//     console.log(id);
+//     setTodoList(
+//       todoList?.map(item =>
+//         item.id === id
+//           ? {
+//               ...item,
+//               completed: !item.completed,
+//             }
+//           : item,
+//       ),
+//     );
+//   };
 
-      <TodoList
-        onDeleteTodo={deleteTodo}
-        onToggleTodo={toggleTodo}
-        onEditTodo={editTodo}
-        todoList={todoList}
-      />
-    </View>
-  );
+//   const editTodo = (id: string, newText: string) => {
+//     console.log(id,newText,'from app.tsx');
+//     setTodoList(
+//       todoList?.map(item=>item.id === id ? {
+//         ...item,
+//         text:newText,
+//       }:item)
+//     )
+//   };
+
+//   const addTodo = (text: string) => {
+//     setTodoList([
+//       ...todoList,
+//       {
+//         id: Date.now().toString(),
+//         text,
+//         completed: false,
+//       },
+//     ]);
+//   };
+
+//   return (
+//     <View style={styles.container}>
+//       <Text style={styles.headerText}>Todo App</Text>
+//       <TodoInput onAddTodo={addTodo} />
+
+//       <TodoList
+//         onDeleteTodo={deleteTodo}
+//         onToggleTodo={toggleTodo}
+//         onEditTodo={editTodo}
+//         todoList={todoList}
+//       />
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     padding: 20,
+//     paddingTop: 30,
+//   },
+//   headerText: {
+//     fontSize: 24,
+//     fontWeight: 'bold',
+//     marginBottom: 20,
+//     textAlign: 'center',
+//   },
+// });
+
+
+// Navigation ---------------------------------------------------------------------------
+function App(): React.JSX.Element{
+  return(
+    <NavigationContainer>
+       <RootNavigator/>
+    </NavigationContainer>
+  )
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -198,5 +229,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
 export default App;
