@@ -10,7 +10,7 @@ import TodoInput from './src/components/TodoInput';
 import {useState} from 'react';
 import TodoList from './src/components/TodoList';
 import {Todo} from './src/types';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from './src/RootNavigator';
 
 // import React, {useState} from 'react';
@@ -129,9 +129,7 @@ import RootNavigator from './src/RootNavigator';
 
 // export default App;
 
-
 // Todo App -----------------------------------------------------------------------------
-
 
 // function App(): React.JSX.Element {
 //   const [todoList, setTodoList] = useState<Todo[]>([]);
@@ -205,16 +203,14 @@ import RootNavigator from './src/RootNavigator';
 //   },
 // });
 
-
 // Navigation ---------------------------------------------------------------------------
-function App(): React.JSX.Element{
-  return(
+function App(): React.JSX.Element {
+  return (
     <NavigationContainer>
-       <RootNavigator/>
+      <RootNavigator />
     </NavigationContainer>
-  )
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
