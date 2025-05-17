@@ -12,6 +12,7 @@ import TodoList from './src/components/TodoList';
 import {Todo} from './src/types';
 import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from './src/RootNavigator';
+import RootNavigation from './src/screens/RootNavigation';
 
 // import React, {useState} from 'react';
 // import type {PropsWithChildren} from 'react';
@@ -204,10 +205,18 @@ import RootNavigator from './src/RootNavigator';
 // });
 
 // Navigation ---------------------------------------------------------------------------
+// function App(): React.JSX.Element {
+//   return (
+//     <NavigationContainer>
+//       <RootNavigator />
+//     </NavigationContainer>
+//   );
+// }
+
 function App(): React.JSX.Element {
   return (
     <NavigationContainer>
-      <RootNavigator />
+      <RootNavigation />
     </NavigationContainer>
   );
 }
