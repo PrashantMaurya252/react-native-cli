@@ -1,4 +1,4 @@
-import {SectionList, Text, View} from 'react-native';
+import {SectionList, StyleSheet, Text, View} from 'react-native';
 
 const SectionListScreen: React.FC = () => {
   const SECTION_DATA = [
@@ -14,10 +14,15 @@ const SectionListScreen: React.FC = () => {
       title: 'Kids',
       data: ['Kids Tshirt 1', 'Kids Shirt 1', 'Kids Jeans'],
     },
+
+    {
+      title: 'Watches',
+      data: ['Watch 1', 'Watch 2', 'Watch 3'],
+    },
   ];
 
   const handleRenderItem = ({item}: {item: string}) => (
-    <View>
+    <View style={styles.item}>
       <Text>{item}</Text>
     </View>
   );
@@ -27,20 +32,45 @@ const SectionListScreen: React.FC = () => {
   }: {
     section: {title: string};
   }) => (
-    <View>
-      <Text>{title}</Text>
+    <View style={styles.sectionHeader}>
+      <Text style={styles.sectionHeaderText}>{title}</Text>
     </View>
   );
   return (
-    <View>
-      <Text>Section list component</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Section list component</Text>
       <SectionList
         renderSectionHeader={renderSectionHeader}
         sections={SECTION_DATA}
         renderItem={handleRenderItem}
+        keyExtractor={(item, index) => item + index}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 15,
+  },
+  header: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  item: {
+    padding: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#eeeeee',
+  },
+  sectionHeader: {
+    backgroundColor: '#f0f0f0',
+    padding: 5,
+  },
+  sectionHeaderText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});
 
 export default SectionListScreen;
