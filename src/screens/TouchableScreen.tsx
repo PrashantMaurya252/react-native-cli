@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {
+  Pressable,
   StyleSheet,
   Text,
   TouchableHighlight,
@@ -18,6 +19,19 @@ const TouchableScreen: React.FC = () => {
           <Text style={styles.btnText}>TouchableHighlight</Text>
         </View>
       </TouchableHighlight>
+      <Pressable
+        style={({pressed}) => [
+          styles.btn,
+          {
+            backgroundColor: pressed ? '#dddddd' : '#b4620b',
+          },
+        ]}>
+        {({pressed}) => (
+          <Text style={[styles.btnText, {color: pressed ? 'red' : 'blue'}]}>
+            {pressed ? 'Pressed Now' : 'Pressable'}
+          </Text>
+        )}
+      </Pressable>
     </View>
   );
 };

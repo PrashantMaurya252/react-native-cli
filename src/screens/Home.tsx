@@ -27,6 +27,11 @@ const topics = [
     title: 'Touchable Demo',
     screen: 'TouchableDemo',
   },
+  {
+    id: 4,
+    title: 'Modal Demo',
+    screen: 'ModalDemo',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
