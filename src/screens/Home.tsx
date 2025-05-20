@@ -32,6 +32,11 @@ const topics = [
     title: 'Modal Demo',
     screen: 'ModalDemo',
   },
+  {
+    id: 5,
+    title: 'Pull To Refresh Demo',
+    screen: 'PullToRefreshDemo',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;

@@ -10,7 +10,7 @@ export type RootStackParamsList = {
   StackDemo: undefined;
   TabDemo: undefined;
   DrawerDemo: undefined;
-  TouchableScreen: undefined;
+  TouchableDemo: undefined;
 };
 const Stack = createStackNavigator<RootStackParamsList>();
 
@@ -21,7 +21,7 @@ const RootNavigator: React.FC = () => {
       <Stack.Screen name="StackDemo" component={StackNavigationDemo} />
       <Stack.Screen name="TabDemo" component={TabNavigationDemo} />
       <Stack.Screen name="DrawerDemo" component={DrawerNavigationDemo} />
-      <Stack.Screen name="TouchableScreen" component={TouchableScreen} />
+      <Stack.Screen name="TouchableDemo" component={TouchableScreen} />
     </Stack.Navigator>
   );
 };
