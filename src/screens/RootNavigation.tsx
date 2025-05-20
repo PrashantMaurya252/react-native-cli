@@ -6,6 +6,8 @@ import SectionListScreen from './SectionListScreen';
 import TouchableScreen from './TouchableScreen';
 import ModalScreen from './ModalScreen';
 import PullToRefreshScreen from './PullToRefreshScreen';
+import DataFetching from './DataFetching';
+import AxiosScreen from './AxiosScreen';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -14,6 +16,8 @@ export type RootStackParamList = {
   TouchableDemo: undefined;
   ModalDemo: undefined;
   PullToRefreshDemo: undefined;
+  FetchDemo: undefined;
+  AxiosDemo: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -27,6 +31,8 @@ const RootNavigation: React.FC = () => {
       <Stack.Screen name="TouchableDemo" component={TouchableScreen} />
       <Stack.Screen name="ModalDemo" component={ModalScreen} />
       <Stack.Screen name="PullToRefreshDemo" component={PullToRefreshScreen} />
+      <Stack.Screen name="FetchDemo" component={DataFetching} />
+      <Stack.Screen name="AxiosDemo" component={AxiosScreen} />
     </Stack.Navigator>
   );
 };

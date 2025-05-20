@@ -1,5 +1,12 @@
 import {useState} from 'react';
-import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const INITIAL_DATA = Array.from({length: 20}, (_, index) => ({
   id: index.toString(),
@@ -53,6 +60,15 @@ const PullToRefreshScreen: React.FC = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={handleOnRefresh} />
         }
+        ListFooterComponent={
+          loading ? (
+            <ActivityIndicator
+              style={styles.loader}
+              size={'large'}
+              color={'#0000ff'}
+            />
+          ) : null
+        }
       />
     </View>
   );
@@ -75,6 +91,9 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  loader: {
+    marginVertical: 20,
   },
 });
 
