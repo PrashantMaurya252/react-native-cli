@@ -13,6 +13,7 @@ import {Todo} from './src/types';
 import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from './src/RootNavigator';
 import RootNavigation from './src/screens/RootNavigation';
+import {ThemeProvider} from './src/context/ThemeContext';
 
 // import React, {useState} from 'react';
 // import type {PropsWithChildren} from 'react';
@@ -215,9 +216,11 @@ import RootNavigation from './src/screens/RootNavigation';
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <RootNavigation />
-    </NavigationContainer>
+    <ThemeProvider>
+      <NavigationContainer>
+        <RootNavigation />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 

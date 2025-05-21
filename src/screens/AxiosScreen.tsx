@@ -1,6 +1,12 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 interface Post {
   id: number;
@@ -48,9 +54,26 @@ const AxiosScreen: React.FC = () => {
   useEffect(() => {
     fetchListPost();
   }, []);
+
+  const renderItem = ({item}: {item: Post}) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.title}>{item.title}</Text>
+      </View>
+    );
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Axios Screen</Text>
+      {loading ? (
+        <ActivityIndicator size={'large'} color={'#0000ff'} />
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+        />
+      )}
     </View>
   );
 };
@@ -62,6 +85,16 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 20,
+    fontWeight: 'bold',
+  },
+  item: {
+    backgroundColor: '#c6df0a',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

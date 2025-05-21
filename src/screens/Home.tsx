@@ -47,6 +47,11 @@ const topics = [
     title: 'Axios API Demo',
     screen: 'AxiosDemo',
   },
+  {
+    id: 8,
+    title: 'Theme Toggle Demo',
+    screen: 'ThemeToggleDemo',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
