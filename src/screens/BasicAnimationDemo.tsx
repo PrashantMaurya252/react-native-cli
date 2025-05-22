@@ -13,6 +13,8 @@ const BasicAnimationDemo: React.FC = () => {
   const fadeAnimation = useRef(new Animated.Value(0)).current;
   const translateAnim = useRef(new Animated.Value(0)).current;
   const scaleAnimation = useRef(new Animated.Value(1)).current;
+  const rotateAnimation = useRef(new Animated.Value(1)).current;
+  const springAnimation = useRef(new Animated.Value(0)).current;
 
   const handleFadeIn = () => {
     Animated.timing(fadeAnimation, {
@@ -57,6 +59,32 @@ const BasicAnimationDemo: React.FC = () => {
         useNativeDriver: true,
       }),
     ]).start();
+  };
+
+  const handleRotate = () => {
+    Animated.timing(rotateAnimation, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(() => {
+      rotateAnimation.setValue(0);
+    });
+  };
+
+  const spin = rotateAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+
+  const handleSpring = () => {
+    Animated.spring(springAnimation, {
+      toValue: 100,
+      friction: 5,
+      tension: 40,
+      useNativeDriver: true,
+    }).start(() => {
+      springAnimation.setValue(0);
+    });
   };
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -108,6 +136,38 @@ const BasicAnimationDemo: React.FC = () => {
           },
         ]}></Animated.View>
       <Button title="Translate" onPress={handleScale} />
+
+      {/* Rotate Animation Demo */}
+      <Text style={styles.headerText}>Rotate Animation Demo</Text>
+      <Animated.View
+        style={[
+          styles.box,
+          styles.rotateBox,
+          {
+            transform: [
+              {
+                rotate: spin,
+              },
+            ],
+          },
+        ]}></Animated.View>
+      <Button title="Rotate" onPress={handleRotate} />
+
+      {/* Spring Animation Demo */}
+      <Text style={styles.headerText}>Spring Animation Demo</Text>
+      <Animated.View
+        style={[
+          styles.box,
+          styles.sprigBox,
+          {
+            transform: [
+              {
+                translateX: springAnimation,
+              },
+            ],
+          },
+        ]}></Animated.View>
+      <Button title="Spring" onPress={handleSpring} />
     </ScrollView>
   );
 };
@@ -159,6 +219,12 @@ const styles = StyleSheet.create({
   },
   scaleBox: {
     backgroundColor: '#350bb1',
+  },
+  rotateBox: {
+    backgroundColor: '#a30977',
+  },
+  sprigBox: {
+    backgroundColor: '#a30925',
   },
 });
 export default BasicAnimationDemo;
