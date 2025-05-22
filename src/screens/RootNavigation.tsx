@@ -9,6 +9,7 @@ import PullToRefreshScreen from './PullToRefreshScreen';
 import DataFetching from './DataFetching';
 import AxiosScreen from './AxiosScreen';
 import ThemeScreen from './ThemeScreen';
+import BasicAnimationDemo from './BasicAnimationDemo';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   FetchDemo: undefined;
   AxiosDemo: undefined;
   ThemeToggleDemo: undefined;
+  BasicAnimationDemo: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -36,6 +38,7 @@ const RootNavigation: React.FC = () => {
       <Stack.Screen name="FetchDemo" component={DataFetching} />
       <Stack.Screen name="AxiosDemo" component={AxiosScreen} />
       <Stack.Screen name="ThemeToggleDemo" component={ThemeScreen} />
+      <Stack.Screen name="BasicAnimationDemo" component={BasicAnimationDemo} />
     </Stack.Navigator>
   );
 };

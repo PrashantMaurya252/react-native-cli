@@ -52,6 +52,11 @@ const topics = [
     title: 'Theme Toggle Demo',
     screen: 'ThemeToggleDemo',
   },
+  {
+    id: 9,
+    title: 'Basic Animation Demo',
+    screen: 'BasicAnimationDemo',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
