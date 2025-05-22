@@ -2,6 +2,7 @@ import {useRef} from 'react';
 import {
   Animated,
   Button,
+  Easing,
   ScrollView,
   StyleSheet,
   Text,
@@ -10,6 +11,8 @@ import {
 
 const BasicAnimationDemo: React.FC = () => {
   const fadeAnimation = useRef(new Animated.Value(0)).current;
+  const translateAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnimation = useRef(new Animated.Value(1)).current;
 
   const handleFadeIn = () => {
     Animated.timing(fadeAnimation, {
@@ -26,9 +29,39 @@ const BasicAnimationDemo: React.FC = () => {
       useNativeDriver: true,
     }).start();
   };
+
+  const handleTranslate = () => {
+    Animated.timing(translateAnim, {
+      toValue: 100,
+      duration: 1000,
+      easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handleScale = () => {
+    Animated.sequence([
+      Animated.timing(scaleAnimation, {
+        toValue: 1.5,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnimation, {
+        toValue: 3,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnimation, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  };
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.headerText}>Basic Animation Demo</Text>
+      <Text style={styles.headerText}>Fade In & Fade Out Demo</Text>
       <View style={styles.demoContainer}>
         <Animated.View
           style={[
@@ -41,6 +74,40 @@ const BasicAnimationDemo: React.FC = () => {
           <Button onPress={handleFadeOut} title="Fade Out" />
         </View>
       </View>
+
+      {/* Translation Demo */}
+      <Text style={styles.headerText}>Translation Demo</Text>
+      <View style={styles.demoContainer}>
+        <Animated.View
+          style={[
+            styles.box,
+            styles.translateBox,
+            {
+              transform: [
+                {
+                  translateX: translateAnim,
+                },
+              ],
+            },
+          ]}></Animated.View>
+        <Button title="Translate" onPress={handleTranslate} />
+      </View>
+
+      {/* Scale Demo */}
+      <Text style={styles.headerText}>Scale Demo</Text>
+      <Animated.View
+        style={[
+          styles.box,
+          styles.scaleBox,
+          {
+            transform: [
+              {
+                scale: scaleAnimation,
+              },
+            ],
+          },
+        ]}></Animated.View>
+      <Button title="Translate" onPress={handleScale} />
     </ScrollView>
   );
 };
@@ -55,6 +122,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 10,
   },
   demoContainer: {
     alignItems: 'center',
@@ -85,6 +153,12 @@ const styles = StyleSheet.create({
   },
   fadeBox: {
     backgroundColor: '#3498db',
+  },
+  translateBox: {
+    backgroundColor: '#3498db',
+  },
+  scaleBox: {
+    backgroundColor: '#350bb1',
   },
 });
 export default BasicAnimationDemo;
