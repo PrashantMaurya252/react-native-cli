@@ -15,6 +15,7 @@ const BasicAnimationDemo: React.FC = () => {
   const scaleAnimation = useRef(new Animated.Value(1)).current;
   const rotateAnimation = useRef(new Animated.Value(1)).current;
   const springAnimation = useRef(new Animated.Value(0)).current;
+  const bounceAnimation = useRef(new Animated.Value(0)).current;
 
   const handleFadeIn = () => {
     Animated.timing(fadeAnimation, {
@@ -85,6 +86,13 @@ const BasicAnimationDemo: React.FC = () => {
     }).start(() => {
       springAnimation.setValue(0);
     });
+  };
+
+  const handleBounce = () => {
+    Animated.sequence([
+      Animated.spring(bounceAnimation, {toValue: -20, useNativeDriver: true}),
+      Animated.spring(bounceAnimation, {toValue: 0, useNativeDriver: true}),
+    ]).start();
   };
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -168,6 +176,22 @@ const BasicAnimationDemo: React.FC = () => {
           },
         ]}></Animated.View>
       <Button title="Spring" onPress={handleSpring} />
+
+      {/* Bounce Animation Demo */}
+      <Text style={styles.headerText}>Bounce Animation Demo</Text>
+      <Animated.View
+        style={[
+          styles.box,
+          styles.bounceBox,
+          {
+            transform: [
+              {
+                translateY: bounceAnimation,
+              },
+            ],
+          },
+        ]}></Animated.View>
+      <Button title="Bounce" onPress={handleBounce} />
     </ScrollView>
   );
 };
@@ -225,6 +249,9 @@ const styles = StyleSheet.create({
   },
   sprigBox: {
     backgroundColor: '#a30925',
+  },
+  bounceBox: {
+    backgroundColor: '#7f09a3ec',
   },
 });
 export default BasicAnimationDemo;
