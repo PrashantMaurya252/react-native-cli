@@ -62,6 +62,12 @@ const topics = [
     title: 'Interpolation Demo',
     screen: 'Interploation',
   },
+
+  {
+    id: 11,
+    title: 'Combined Animation Demo',
+    screen: 'CombinedAnimation',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;

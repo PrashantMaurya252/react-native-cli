@@ -11,6 +11,7 @@ import AxiosScreen from './AxiosScreen';
 import ThemeScreen from './ThemeScreen';
 import BasicAnimationDemo from './BasicAnimationDemo';
 import Interpolation from './Interpolation';
+import CombinedAnimation from './CombinedAnimation';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -24,6 +25,7 @@ export type RootStackParamList = {
   ThemeToggleDemo: undefined;
   BasicAnimationDemo: undefined;
   Interploation: undefined;
+  CombinedAnimation: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -42,6 +44,7 @@ const RootNavigation: React.FC = () => {
       <Stack.Screen name="ThemeToggleDemo" component={ThemeScreen} />
       <Stack.Screen name="BasicAnimationDemo" component={BasicAnimationDemo} />
       <Stack.Screen name="Interploation" component={Interpolation} />
+      <Stack.Screen name="CombinedAnimation" component={CombinedAnimation} />
     </Stack.Navigator>
   );
 };

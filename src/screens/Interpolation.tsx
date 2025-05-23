@@ -20,11 +20,30 @@ const Interpolation: React.FC = () => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
+
+  const borderRadius = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [4, 100],
+  });
+
+  const size = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [100, 200],
+  });
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Interpolation Demo</Text>
       <Animated.View
-        style={[styles.box, {backgroundColor, transform: [{rotate}]}]}>
+        style={[
+          styles.box,
+          {
+            backgroundColor,
+            transform: [{rotate}],
+            borderRadius,
+            width: size,
+            height: size,
+          },
+        ]}>
         <Text style={styles.boxText}>Interpolate Me!</Text>
       </Animated.View>
       <Button title="Start Animation here" onPress={handleStartAnimation} />
