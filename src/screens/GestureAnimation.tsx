@@ -17,6 +17,12 @@ const GestureAnimation: React.FC = () => {
         ],
         {useNativeDriver: false},
       ),
+      onPanResponderRelease: () => {
+        Animated.spring(pan, {
+          toValue: {x: 0, y: 0},
+          useNativeDriver: false,
+        }).start();
+      },
     }),
   ).current;
   return (
