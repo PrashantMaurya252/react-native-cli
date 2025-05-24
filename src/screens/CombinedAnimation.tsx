@@ -1,5 +1,5 @@
 import {useRef} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, Button, StyleSheet, Text, View} from 'react-native';
 
 const CombinedAnimation: React.FC = () => {
   const moveAndRotateAnim = useRef(new Animated.Value(0)).current;
@@ -13,6 +13,25 @@ const CombinedAnimation: React.FC = () => {
       useNativeDriver: false,
     }).start();
   };
+
+  const moveX = moveAndRotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 100],
+  });
+
+  const moveY = moveAndRotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 100],
+  });
+
+  const rotate = moveAndRotateAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
+  const backgroundColor = moveAndRotateAnim.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: ['#0697ad', '#cce812', '#1248e8'],
+  });
   const pulseAnimation = () => {
     Animated.loop(
       Animated.sequence([
@@ -38,21 +57,21 @@ const CombinedAnimation: React.FC = () => {
           styles.box,
           {
             transform: [
-              {
-                translateX: moveX,
-              },
-              {
-                translateY: moveY,
-              },
-              {
-                rotate: rotate,
-              },
-              {
-                scale: pulseAnimation,
-              },
+              {translateX: moveX},
+              {translateY: moveY},
+              {rotate: rotate},
+              {scale: pulseAnim},
             ],
+            backgroundColor,
           },
         ]}></Animated.View>
+      <View style={styles.btnContainer}>
+        <Button
+          title="Move, rotate & change color"
+          onPress={combinedAnimation}
+        />
+        <Button title="Pulse" onPress={pulseAnimation} />
+      </View>
     </View>
   );
 };
@@ -84,6 +103,10 @@ const styles = StyleSheet.create({
     shadowRadius: 3.5,
     elevation: 5,
     backgroundColor: 'red',
+  },
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 
