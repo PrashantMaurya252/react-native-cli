@@ -12,6 +12,7 @@ import ThemeScreen from './ThemeScreen';
 import BasicAnimationDemo from './BasicAnimationDemo';
 import Interpolation from './Interpolation';
 import CombinedAnimation from './CombinedAnimation';
+import GestureAnimation from './GestureAnimation';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -26,6 +27,7 @@ export type RootStackParamList = {
   BasicAnimationDemo: undefined;
   Interploation: undefined;
   CombinedAnimation: undefined;
+  GestureDemo: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -45,6 +47,7 @@ const RootNavigation: React.FC = () => {
       <Stack.Screen name="BasicAnimationDemo" component={BasicAnimationDemo} />
       <Stack.Screen name="Interploation" component={Interpolation} />
       <Stack.Screen name="CombinedAnimation" component={CombinedAnimation} />
+      <Stack.Screen name="GestureDemo" component={GestureAnimation} />
     </Stack.Navigator>
   );
 };

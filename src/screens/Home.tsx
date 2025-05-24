@@ -68,6 +68,11 @@ const topics = [
     title: 'Combined Animation Demo',
     screen: 'CombinedAnimation',
   },
+  {
+    id: 12,
+    title: 'Gesture Animation Demo',
+    screen: 'GestureDemo',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
