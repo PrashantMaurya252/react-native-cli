@@ -16,6 +16,7 @@ import GestureAnimation from './GestureAnimation';
 import CoreConcept from './reanimated/CoreConcepts';
 import ReanimationTypes from './reanimated/ReanimationTypes';
 import ReanimationGesture from './reanimated/ReanimationGesture';
+import ReanimationFormValidation from './reanimated/ReanimationFormValidation';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -34,6 +35,7 @@ export type RootStackParamList = {
   ReanimatedCore: undefined;
   ReanimationTypes: undefined;
   ReanimationGesture: undefined;
+  ReanimationFormValidation: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -57,6 +59,10 @@ const RootNavigation: React.FC = () => {
       <Stack.Screen name="ReanimatedCore" component={CoreConcept} />
       <Stack.Screen name="ReanimationTypes" component={ReanimationTypes} />
       <Stack.Screen name="ReanimationGesture" component={ReanimationGesture} />
+      <Stack.Screen
+        name="ReanimationFormValidation"
+        component={ReanimationFormValidation}
+      />
     </Stack.Navigator>
   );
 };

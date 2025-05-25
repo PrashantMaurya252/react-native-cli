@@ -90,6 +90,11 @@ const topics = [
     title: 'Reanimated Gesture Demo',
     screen: 'ReanimationGesture',
   },
+  {
+    id: 16,
+    title: 'Reanimation Form Validation',
+    screen: 'ReanimationFormValidation',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
