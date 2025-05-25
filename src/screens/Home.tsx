@@ -79,6 +79,12 @@ const topics = [
     title: 'Reanimated Core Concepts',
     screen: 'ReanimatedCore',
   },
+
+  {
+    id: 14,
+    title: 'Reanimated Animation Types',
+    screen: 'ReanimationTypes',
+  },
 ];
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
