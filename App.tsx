@@ -14,6 +14,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import RootNavigator from './src/RootNavigator';
 import RootNavigation from './src/screens/RootNavigation';
 import {ThemeProvider} from './src/context/ThemeContext';
+import ReduxRootNavigation from './src/redux-navigation/RootNavigation';
+import {Provider} from 'react-redux';
+import {store} from './src/store/store';
 
 // import React, {useState} from 'react';
 // import type {PropsWithChildren} from 'react';
@@ -214,13 +217,25 @@ import {ThemeProvider} from './src/context/ThemeContext';
 //   );
 // }
 
+// components,animation, reanimation
+// function App(): React.JSX.Element {
+//   return (
+//     <ThemeProvider>
+//       <NavigationContainer>
+//         <RootNavigation />
+//       </NavigationContainer>
+//     </ThemeProvider>
+//   );
+// }
+
+// redux
 function App(): React.JSX.Element {
   return (
-    <ThemeProvider>
+    <Provider store={store}>
       <NavigationContainer>
-        <RootNavigation />
+        <ReduxRootNavigation />
       </NavigationContainer>
-    </ThemeProvider>
+    </Provider>
   );
 }
 
