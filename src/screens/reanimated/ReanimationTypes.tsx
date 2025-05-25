@@ -4,6 +4,8 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withDecay,
+  withDelay,
+  withRepeat,
   withSequence,
   withSpring,
   withTiming,
@@ -43,6 +45,7 @@ const ReanimationTypes: React.FC = () => {
   const handleResetAnimation = () => {
     translateX.value = withTiming(0);
     scale.value = withTiming(1);
+    rotate.value = withTiming(0);
   };
 
   // Spring Animation
@@ -71,6 +74,18 @@ const ReanimationTypes: React.FC = () => {
       withTiming(0, {duration: 1000}),
     );
   };
+
+  // delay animation
+
+  const handleDelayAnimation = () => {
+    translateX.value = withDelay(1000, withSpring(200));
+  };
+
+  // repeat animation
+
+  const handleRepeat = () => {
+    scale.value = withRepeat(withTiming(1.5, {duration: 500}), 6, true);
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Reanimation Types</Text>
@@ -89,11 +104,13 @@ const ReanimationTypes: React.FC = () => {
         <Pressable style={styles.btn} onPress={handleSequenceAnimation}>
           <Text style={styles.btnText}>Sequence</Text>
         </Pressable>
-        <Pressable style={styles.btn}>
+        <Pressable style={styles.btn} onPress={handleRepeat}>
           <Text style={styles.btnText}>Repeat</Text>
         </Pressable>
         <Pressable style={styles.btn}>
-          <Text style={styles.btnText}>Delay</Text>
+          <Text style={styles.btnText} onPress={handleDelayAnimation}>
+            Delay
+          </Text>
         </Pressable>
         <Pressable style={styles.btn} onPress={handleResetAnimation}>
           <Text style={styles.btnText}>Reset</Text>
