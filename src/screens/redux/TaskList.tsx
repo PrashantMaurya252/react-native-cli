@@ -4,6 +4,7 @@ import {
   Modal,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -15,7 +16,9 @@ const TaskList: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* render list of tasks here */}
-      <TouchableOpacity style={styles.addBtn}>
+      <TouchableOpacity
+        style={styles.addBtn}
+        onPress={() => setIsModalVisible(true)}>
         <Text style={styles.addBtnText}>Add</Text>
       </TouchableOpacity>
       <Modal
@@ -27,6 +30,26 @@ const TaskList: React.FC = () => {
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Add New Task</Text>
+              <TouchableOpacity
+                style={styles.closeBtn}
+                onPress={() => setIsModalVisible(false)}>
+                <Text style={styles.closeBtnText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              style={styles.input}
+              value={newTaskTitle}
+              onChangeText={setNewTaskTitle}
+              placeholder="Enter Task Title"
+              placeholderTextColor="#999999"
+              autoFocus
+            />
+            <View style={styles.modalButton}>
+              <TouchableOpacity
+                style={styles.closeBtn}
+                onPress={() => setIsModalVisible(false)}>
+                <Text style={styles.closeBtnText}>Cancel</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </KeyboardAvoidingView>
@@ -81,6 +104,28 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 'bold',
     color: '#333333',
+  },
+  closeBtn: {
+    backgroundColor: '#6200ee',
+
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // elevation: 4,
+    padding: 12,
+  },
+  closeBtnText: {
+    fontWeight: 'bold',
+    fontSize: 12,
+    color: '#ffffff',
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+    borderRadius: 4,
+    padding: 12,
+    marginBottom: 20,
+    fontSize: 16,
   },
 });
 
