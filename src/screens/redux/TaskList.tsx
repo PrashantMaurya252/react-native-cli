@@ -8,10 +8,28 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '../../store/store';
+import {addTask} from '../../store/taskSlice';
 
 const TaskList: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleAddNewTask = () => {
+    if (newTaskTitle.trim()) {
+      dispatch(
+        addTask({
+          title: newTaskTitle.trim(),
+          completed: false,
+        }),
+      );
+
+      setNewTaskTitle('');
+      setIsModalVisible(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -46,9 +64,14 @@ const TaskList: React.FC = () => {
             />
             <View style={styles.modalButton}>
               <TouchableOpacity
-                style={styles.closeBtn}
+                style={[styles.modalBtn, styles.cancelBtn]}
                 onPress={() => setIsModalVisible(false)}>
                 <Text style={styles.closeBtnText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={handleAddNewTask}
+                style={[styles.modalBtn, styles.submitBtn]}>
+                <Text style={styles.closeBtnText}>Add Task</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -126,6 +149,22 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 20,
     fontSize: 16,
+  },
+  modalButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  modalBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 4,
+    marginLeft: 10,
+  },
+  cancelBtn: {
+    backgroundColor: '#d37c09',
+  },
+  submitBtn: {
+    backgroundColor: '#b912a3',
   },
 });
 
