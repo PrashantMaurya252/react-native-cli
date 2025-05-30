@@ -1,5 +1,6 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
+  FlatList,
   KeyboardAvoidingView,
   Modal,
   StyleSheet,
@@ -8,14 +9,27 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '../../store/store';
-import {addTask} from '../../store/taskSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../store/store';
+import {addTask, fetchTasks, Task} from '../../store/taskSlice';
+import Animated, {
+  FadeInRight,
+  FadeOutRight,
+  Layout,
+} from 'react-native-reanimated';
 
 const TaskList: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const dispatch = useDispatch<AppDispatch>();
+  const tasks = useSelector((state: RootState) => state.tasks.tasks);
+  console.log('taskList', tasks);
+
+  const status = useSelector((state: RootState) => state.tasks.status);
+
+  useEffect(() => {
+    if (status === 'idle') dispatch(fetchTasks());
+  }, [status, dispatch]);
 
   const handleAddNewTask = () => {
     if (newTaskTitle.trim()) {
@@ -31,9 +45,35 @@ const TaskList: React.FC = () => {
     }
   };
 
+  const createRenderTask = ({item}: {item: Task}) => (
+    <Animated.View
+      entering={FadeInRight}
+      exiting={FadeOutRight}
+      layout={Layout.springify()}>
+      <TouchableOpacity
+        style={[styles.taskItem, item.completed && styles.completedTask]}>
+        <Text
+          style={[
+            styles.taskItemText,
+            item.completed && styles.completedTaskitemText,
+          ]}>
+          {item.title}
+        </Text>
+        <TouchableOpacity style={styles.deleteTaskButton}>
+          <Text style={styles.deleteTaskButtonText}>Delete</Text>
+        </TouchableOpacity>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+
   return (
     <View style={styles.container}>
       {/* render list of tasks here */}
+      <FlatList
+        data={tasks}
+        renderItem={createRenderTask}
+        keyExtractor={item => item.id}
+      />
       <TouchableOpacity
         style={styles.addBtn}
         onPress={() => setIsModalVisible(true)}>
@@ -165,6 +205,36 @@ const styles = StyleSheet.create({
   },
   submitBtn: {
     backgroundColor: '#b912a3',
+  },
+  taskItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    padding: 15,
+    marginVertical: 8,
+    borderRadius: 8,
+    elevation: 2,
+  },
+  completedTask: {
+    opacity: 0.7,
+  },
+  taskItemText: {
+    marginLeft: 10,
+    fontSize: 16,
+    flex: 1,
+  },
+  completedTaskitemText: {
+    textDecorationLine: 'line-through',
+  },
+  deleteTaskButton: {
+    backgroundColor: '#d37c09',
+    padding: 12,
+    borderRadius: 25,
+  },
+  deleteTaskButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
 });
 
