@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import {
+  Alert,
   FlatList,
   KeyboardAvoidingView,
   Modal,
@@ -11,7 +12,13 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../store/store';
-import {addTask, fetchTasks, Task} from '../../store/taskSlice';
+import {
+  addTask,
+  deleteTask,
+  fetchTasks,
+  Task,
+  toggleTask,
+} from '../../store/taskSlice';
 import Animated, {
   FadeInRight,
   FadeOutRight,
@@ -45,12 +52,31 @@ const TaskList: React.FC = () => {
     }
   };
 
+  const handleDeleteTask = (taskId: string) => {
+    Alert.alert(
+      'Delete Task',
+      'Are you sure that you want to delete the task ?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => dispatch(deleteTask(taskId)),
+        },
+      ],
+    );
+  };
+
   const createRenderTask = ({item}: {item: Task}) => (
     <Animated.View
       entering={FadeInRight}
       exiting={FadeOutRight}
       layout={Layout.springify()}>
       <TouchableOpacity
+        onPress={() => dispatch(toggleTask(item.id))}
         style={[styles.taskItem, item.completed && styles.completedTask]}>
         <Text
           style={[
@@ -59,7 +85,9 @@ const TaskList: React.FC = () => {
           ]}>
           {item.title}
         </Text>
-        <TouchableOpacity style={styles.deleteTaskButton}>
+        <TouchableOpacity
+          style={styles.deleteTaskButton}
+          onPress={() => handleDeleteTask(item.id)}>
           <Text style={styles.deleteTaskButtonText}>Delete</Text>
         </TouchableOpacity>
       </TouchableOpacity>
